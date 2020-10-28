@@ -16,22 +16,35 @@ const binarySearch = (array, target) => {
 		// declare a constant pointer: half of the length so that it's the middle of the array
 		let searchIndex = Math.floor(array.length/2) // round up
 		console.log('INITIAL SEARCHINDEX = ', array[searchIndex])
+		let start = 0
+		let end = array.length - 1
+		let subArrLength = array.length
+		console.log('INITIAL SUBARRLENGTH = ', subArrLength, '\n')
 
 
-		while (array[searchIndex] !== array[0]|| array[searchIndex] !== array[array.length]) {
+		while (start <= end) {
+			//subArrLength = Math.floor(subArrLength)
+			console.log('\nNEW SUBARRLENGTH = ', subArrLength)
 			// check if the search index
 			if (array[searchIndex] === target) {
 				return true
 			} else if (array[searchIndex] > target){
 				//going to the left
-				searchIndex--
+				end = searchIndex - 1
+				console.log('END', end)
+				searchIndex = Math.floor(searchIndex/2)
 				console.log('TO LEFT SEARCHINDEX = ', array[searchIndex])
 			} else {
 				//searchIndex is less than the target, going to the right
+				start = searchIndex + 1
+				console.log('START', start)
 				let half = Math.floor(searchIndex/2)
-				searchIndex++
+				searchIndex = searchIndex + half
+				
 				console.log('TO RIGHT SEARCHINDEX = ', array[searchIndex])
 			}
+			subArrLength = Math.floor(subArrLength/2)
+
 		}
 	}
 	// 3. else: if no target in the array, return false
